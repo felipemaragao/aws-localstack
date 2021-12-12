@@ -1,0 +1,20 @@
+version: '3.1'
+
+services: 
+
+  localstack:
+    image: localstack/localstack:latest
+    environment: 
+      - AWS_DEFAULT_REGION=us-east-1
+      - AWS_ACCESS_KEY_ID=qualify
+      - AWS_SECRET_ACCESS_KEY=qualify
+      - AWS_DEFAULT_OUTPUT=json
+      - EDGE_PORT=4566
+      - SERVICES=lambda,s3,secretsmanager
+      - DATA_DIR=/tmp/localstack/data
+    ports: 
+      - "4566-4583:4566-4583"
+    volumes: 
+      - "localstack-vol:/tmp/localstack" #use a volume not a path
+volumes:
+  localstack-vol: #declare the volume for the compose file
